@@ -1,0 +1,29 @@
+-- This file has been generated from package.yaml by hpack version 0.28.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: d40c91a4a1f7e2d0cceab31a0429d828913adc1ff2015be99cadac5e5242f95b
+
+name:           tetris
+version:        0.1.0.0
+category:       Web
+homepage:       https://github.com/artur3303/tetris#readme
+author:         AKarpov
+maintainer:     artik100313@gmail.com
+copyright:      2018 AKarpov
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+cabal-version:  >= 1.10
+extra-source-files:
+    README.md
+
+executable tetris
+  main-is: Main.hs
+  other-modules:
+      Paths_tetris
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
