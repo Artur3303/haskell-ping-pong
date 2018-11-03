@@ -4,15 +4,16 @@ version:             0.1.0.0
 #description:
 homepage:            https://github.com/artur3303/haskell-ping-pong#readme
 license:             BSD3
-author:              AKarpov
-maintainer:          artik100313@gmail.com
-copyright:           2018 AKarpov
+author:              AKarpov, RNovikov, RAkhmadiev, MAndreichev
+maintainer:          
+copyright:           2018 MD
 category:            Web
 extra-source-files:
 - README.md
 
 dependencies:
   - base >= 4.7 && < 5
+  - gloss
 
 executables:
   haskell-ping-pong:
