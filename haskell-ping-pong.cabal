@@ -2,15 +2,14 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 0a6342c3fd9fcbbc7abbcb662379abce0b81f89be34130dbf35ab594673bd4c1
+-- hash: 6a3ee700da6adacc623608ab06b9b491a2a479a1711a5998f6b59837cc97aef8
 
 name:           haskell-ping-pong
 version:        0.1.0.0
 category:       Web
 homepage:       https://github.com/artur3303/haskell-ping-pong#readme
-author:         AKarpov
-maintainer:     artik100313@gmail.com
-copyright:      2018 AKarpov
+author:         AKarpov, RNovikov, RAkhmadiev, MAndreichev
+copyright:      2018 MD
 license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
@@ -26,4 +25,5 @@ executable haskell-ping-pong
       src
   build-depends:
       base >=4.7 && <5
+    , gloss
   default-language: Haskell2010

@@ -5,7 +5,7 @@ version:             0.1.0.0
 homepage:            https://github.com/artur3303/haskell-ping-pong#readme
 license:             BSD3
 author:              AKarpov, RNovikov, RAkhmadiev, MAndreichev
-maintainer:          
+#maintainer:          
 copyright:           2018 MD
 category:            Web
 extra-source-files:
