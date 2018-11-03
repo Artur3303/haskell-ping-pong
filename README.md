@@ -1,1 +1,1 @@
-# haskell-tetris
+# haskell-ping-pong

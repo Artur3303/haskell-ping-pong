@@ -2,12 +2,12 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: d40c91a4a1f7e2d0cceab31a0429d828913adc1ff2015be99cadac5e5242f95b
+-- hash: 0a6342c3fd9fcbbc7abbcb662379abce0b81f89be34130dbf35ab594673bd4c1
 
-name:           tetris
+name:           haskell-ping-pong
 version:        0.1.0.0
 category:       Web
-homepage:       https://github.com/artur3303/tetris#readme
+homepage:       https://github.com/artur3303/haskell-ping-pong#readme
 author:         AKarpov
 maintainer:     artik100313@gmail.com
 copyright:      2018 AKarpov
@@ -18,10 +18,10 @@ cabal-version:  >= 1.10
 extra-source-files:
     README.md
 
-executable tetris
+executable haskell-ping-pong
   main-is: Main.hs
   other-modules:
-      Paths_tetris
+      Paths_haskell_ping_pong
   hs-source-dirs:
       src
   build-depends:

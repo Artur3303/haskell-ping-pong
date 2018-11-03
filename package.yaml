@@ -1,8 +1,8 @@
-name:                tetris
+name:                haskell-ping-pong
 version:             0.1.0.0
 #synopsis:
 #description:
-homepage:            https://github.com/artur3303/tetris#readme
+homepage:            https://github.com/artur3303/haskell-ping-pong#readme
 license:             BSD3
 author:              AKarpov
 maintainer:          artik100313@gmail.com
@@ -15,6 +15,6 @@ dependencies:
   - base >= 4.7 && < 5
 
 executables:
-  tetris:
+  haskell-ping-pong:
     source-dirs:      src
     main:             Main.hs
