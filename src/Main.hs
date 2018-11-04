@@ -6,7 +6,7 @@ import EventHandler
 import Renderer
 
 window :: Display
-window = InWindow "Ping Pong Game" (900,800) (500,200)
+window = InWindow "Ping Pong Game" (900,700) (500,150)
 
 background :: Color
 background = white
@@ -16,4 +16,4 @@ fps = 60
 
 main :: IO ()
 main = do
-  play window background initialGameState render handleEvent
+  play window background fps initialGameState render handleEvent updateGameState
