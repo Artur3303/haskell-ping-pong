@@ -4,30 +4,13 @@ import State
 import Graphics.Gloss
 import Graphics.Gloss.Interface.Pure.Game
 
-maxY :: Float
-maxY = 200.0
-
-minY :: Float
-minY = -240.0
-
 handleEvent :: Event -> State -> State
-handleEvent (EventKey (Char       'w')     Down _ _) gameState = moveFstPlatform 20.0    gameState
-handleEvent (EventKey (Char       's')     Down _ _) gameState = moveFstPlatform (-20.0) gameState
-handleEvent (EventKey (SpecialKey KeyUp)   Down _ _) gameState = moveSndPlatform (20.0)  gameState
-handleEvent (EventKey (SpecialKey KeyDown) Down _ _) gameState = moveSndPlatform (-20.0) gameState
+handleEvent (EventKey (Char       'w')     Down _ _) gameState = gameState { keyWisPressed = True }
+handleEvent (EventKey (Char       'w')     Up   _ _) gameState = gameState { keyWisPressed = False }
+handleEvent (EventKey (Char       's')     Down _ _) gameState = gameState { keySisPressed = True }
+handleEvent (EventKey (Char       's')     Up   _ _) gameState = gameState { keySisPressed = False }
+handleEvent (EventKey (SpecialKey KeyUp)   Down _ _) gameState = gameState { keyUpIsPressed = True }
+handleEvent (EventKey (SpecialKey KeyUp)   Up   _ _) gameState = gameState { keyUpIsPressed = False }
+handleEvent (EventKey (SpecialKey KeyDown) Down _ _) gameState = gameState { keyDownIsPressed = True }
+handleEvent (EventKey (SpecialKey KeyDown) Up   _ _) gameState = gameState { keyDownIsPressed = False }
 handleEvent _                                        gameState = gameState
-
-calcNewY :: Float -> Float -> Float
-calcNewY oldY delta = if newY <= maxY && newY >= minY then newY
-                      else oldY
-                        where newY = oldY + delta
-
-moveFstPlatform :: Float -> State -> State
-moveFstPlatform delta gameState = gameState
-    { fstPlatformPos = ( fst pos, calcNewY (snd pos) delta ) } where
-        pos = fstPlatformPos gameState
-
-moveSndPlatform :: Float -> State -> State
-moveSndPlatform delta gameState = gameState
-    { sndPlatformPos = ( fst pos, calcNewY (snd pos) delta ) } where
-        pos = sndPlatformPos gameState

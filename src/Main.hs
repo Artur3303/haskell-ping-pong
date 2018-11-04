@@ -4,6 +4,7 @@ import Graphics.Gloss
 import State
 import EventHandler
 import Renderer
+import Logic
 
 window :: Display
 window = InWindow "Ping Pong Game" (900,700) (500,150)
