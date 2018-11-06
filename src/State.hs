@@ -3,9 +3,10 @@ module State(State(..), initialGameState) where
 import Graphics.Gloss
 
 data State = State
-    { fstPlatformPos   :: Point
-    , sndPlatformPos   :: Point
+    { leftPlatformPos  :: Point
+    , rightPlatformPos :: Point
     , ballPos          :: Point
+    , ballSpeed        :: (Float,Float)
     , score            :: (Int,Int)
     , time             :: Float
     , keyWisPressed    :: Bool
@@ -16,9 +17,10 @@ data State = State
 
 initialGameState :: State
 initialGameState = State 
-    { fstPlatformPos   = (-370.0, -20.0)
-    , sndPlatformPos   = (360.0, -20.0)
+    { leftPlatformPos  = (-370.0, -20.0)
+    , rightPlatformPos = (360.0, -20.0)
     , ballPos          = (0.0, -50.0)
+    , ballSpeed        = (3.0, 0.0)
     , score            = (0,0)
     , time             = 0.0
     , keyWisPressed    = False
