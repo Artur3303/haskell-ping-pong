@@ -32,28 +32,29 @@ updateBallPos :: State -> State
 updateBallPos = moveBall . rebound
 
 rebound :: State -> State
-rebound gameState = if aroundLeft || aroundRight then recalcSpeed gameState else gameState where
-    posX           = fst $ ballPos gameState
-    posY           = snd $ ballPos gameState
-    leftPlatformY  = snd $ leftPlatformPos  gameState
-    rightPlatformY = snd $ rightPlatformPos gameState
-    aroundLeft     = (posX>=(-360.0) && posX<=(-350.0)) && (posY<=leftPlatformY && posY>=leftPlatformY - 60)
-    aroundRight    = (posX>=350.0 && posX<=360.0) && (posY<=rightPlatformY && posY>=rightPlatformY - 60)
-
-
-recalcSpeed :: State -> State
-recalcSpeed gameState = gameState { ballSpeed = newSpeed } where
-    oldSpeed = ballSpeed gameState
-    newSpeed = (negate $ fst oldSpeed, snd oldSpeed)
+rebound gameState = aroundWall $ aroundPlatform gameState where
+    posX   = fst $ ballPos          gameState
+    posY   = snd $ ballPos          gameState
+    leftY  = snd $ leftPlatformPos  gameState
+    rightY = snd $ rightPlatformPos gameState
+    left   = (posX>=(-360.0) && posX<=(-355.0)) && (posY<=leftY  && posY>=leftY-60.0)
+    right  = (posX>=355.0    && posX<=360.0)    && (posY<=rightY && posY>=rightY-60.0)
+    wall   = (posY<=190.0 && posY>=180.0) || (posY<=(-280.0) && posY>=(-290.0))
+    aroundWall gameState = if wall then
+        gameState { ballSpeed = (fst $ ballSpeed gameState, negate $ snd $ ballSpeed gameState) }
+        else gameState
+    aroundPlatform gameState = if left || right then
+        gameState { ballSpeed = (negate $ fst $ ballSpeed gameState, snd $ ballSpeed gameState) }
+        else gameState
 
 moveBall :: State -> State
-moveBall gameState = gameState { ballPos = newPos } where
+moveBall gameState = let
+    posX = fst $ ballPos gameState
+    posY = snd $ ballPos gameState
     speedX = fst $ ballSpeed gameState
     speedY = snd $ ballSpeed gameState
-    oldX   = fst $ ballPos   gameState
-    oldY   = snd $ ballPos   gameState
-    newPos = (oldX + speedX,oldY + speedY)
-
+    newBallPos = (posX + speedX, posY + speedY)
+    in gameState { ballPos = newBallPos }
 
 maxY :: Float
 maxY = 200.0

@@ -39,7 +39,7 @@ renderScore (u1,u2) = color black $ pictures [colon, left, right] where
 render :: State -> Picture
 render gameState = pictures [ renderBorder
                             , renderSeparator
-                            , renderBall      $ ballPos          gameState
+                            , renderBall      $ ballPos      gameState
                             , renderPlatform  $ leftPlatformPos  gameState 
                             , renderPlatform  $ rightPlatformPos gameState
                             , renderScore     $ score            gameState

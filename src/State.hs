@@ -19,8 +19,8 @@ initialGameState :: State
 initialGameState = State 
     { leftPlatformPos  = (-370.0, -20.0)
     , rightPlatformPos = (360.0, -20.0)
-    , ballPos          = (0.0, -50.0)
-    , ballSpeed        = (3.0, 0.0)
+    , ballPos      = (0.0, -50.0)
+    , ballSpeed        = (3.0,1.0)
     , score            = (0,0)
     , time             = 0.0
     , keyWisPressed    = False
