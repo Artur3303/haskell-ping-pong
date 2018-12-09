@@ -2,6 +2,7 @@ module Logic where
 
 import EventHandler
 import State
+import Data.Maybe
 
 updateGameState :: Float -> State -> State
 updateGameState secs = updateTime secs . updateBallPos . keyW . keyS . keyUp . keyDown where
@@ -29,7 +30,27 @@ moveRightPlatform delta gameState = gameState
         pos = rightPlatformPos gameState
 
 updateBallPos :: State -> State
-updateBallPos = moveBall . rebound
+updateBallPos = moveBall . rebound . goal
+
+goal :: State -> State
+goal gameState = checkGoal gameState where
+    posX       = fst $ ballPos gameState
+    leftWall   = posX>=(-400.0) && posX<=(-370.0)
+    rightWall  = posX>=370.0 && posX<=400.0
+    leftScore  = fst $ score gameState
+    rightScore = snd $ score gameState
+    checkGoal gameState = 
+        if leftWall then
+            gameState { score     = (leftScore, rightScore + 1)
+                      , ballPos   = ballPos initialGameState
+                      , ballSpeed = (-4.0,1.0)
+                      }
+        else if rightWall then
+            gameState { score     = (leftScore + 1, rightScore)
+                      , ballPos   = ballPos initialGameState
+                      , ballSpeed = (4.0,1.0)
+                      }
+        else gameState
 
 rebound :: State -> State
 rebound gameState = aroundWall $ aroundPlatform gameState where
@@ -39,7 +60,7 @@ rebound gameState = aroundWall $ aroundPlatform gameState where
     rightY = snd $ rightPlatformPos gameState
     left   = (posX>=(-360.0) && posX<=(-355.0)) && (posY<=leftY  && posY>=leftY-60.0)
     right  = (posX>=355.0    && posX<=360.0)    && (posY<=rightY && posY>=rightY-60.0)
-    wall   = (posY<=190.0 && posY>=180.0) || (posY<=(-280.0) && posY>=(-290.0))
+    wall   = (posY<=200.0 && posY>=190.0) || (posY<=(-290.0) && posY>=(-300.0))
     aroundWall gameState = if wall then
         gameState { ballSpeed = (fst $ ballSpeed gameState, negate $ snd $ ballSpeed gameState) }
         else gameState
