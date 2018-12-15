@@ -62,12 +62,28 @@ rebound gameState = aroundWall $ aroundPlatform gameState where
     right  = (posX>=355.0    && posX<=360.0)    && (posY<=rightY && posY>=rightY-60.0)
     wall   = (posY<=200.0 && posY>=190.0) || (posY<=(-290.0) && posY>=(-300.0))
     aroundWall gameState = if wall then
-        gameState { ballSpeed = (fst $ ballSpeed gameState, negate $ snd $ ballSpeed gameState) }
+        gameState {ballSpeed = (fst $ ballSpeed gameState, negate $ snd $ ballSpeed gameState)}
         else gameState
-    aroundPlatform gameState = if left || right then
-        gameState { ballSpeed = (negate $ fst $ ballSpeed gameState, snd $ ballSpeed gameState) }
+    aroundPlatform gameState = if left && (snd $ ballSpeed gameState) > 0 && keyWisPressed gameState then
+        gameState { ballSpeed = (negate $ fst $ ballSpeed gameState, snd $ ballSpeed gameState)}
+        else if left && (snd $ ballSpeed gameState) > 0 && keySisPressed gameState then
+            gameState { ballSpeed = (negate $ fst $ ballSpeed gameState, negate $ snd $ ballSpeed gameState)}
+        else if left && (snd $ ballSpeed gameState) < 0 && keyWisPressed gameState then
+    	    gameState { ballSpeed = (negate $ fst $ ballSpeed gameState, negate $ snd $ ballSpeed gameState)}
+	else if left && (snd $ ballSpeed gameState) < 0 && keySisPressed gameState then
+            gameState { ballSpeed = (negate $ fst $ ballSpeed gameState, snd $ ballSpeed gameState)}
+        else if right && (snd $ ballSpeed gameState) > 0 && keyUpIsPressed gameState then
+            gameState { ballSpeed = (negate $ fst $ ballSpeed gameState, snd $ ballSpeed gameState)}
+        else if right && (snd $ ballSpeed gameState) > 0 && keyDownIsPressed gameState then
+            gameState { ballSpeed = (negate $ fst $ ballSpeed gameState, negate $ snd $ ballSpeed gameState)}
+        else if right && (snd $ ballSpeed gameState) < 0 && keyUpIsPressed gameState then
+            gameState {ballSpeed = (negate $ fst $ ballSpeed gameState, negate $ snd $ ballSpeed gameState)} 
+        else if right && (snd $ ballSpeed gameState) < 0.0 && (keyDownIsPressed gameState) then
+            gameState {ballSpeed = (negate $ fst $ ballSpeed gameState, snd $ ballSpeed gameState)}  
+        else if left || right then 
+            gameState { ballSpeed = (negate $ fst $ ballSpeed gameState, snd $ ballSpeed gameState) }
         else gameState
-
+ 
 moveBall :: State -> State
 moveBall gameState = let
     posX = fst $ ballPos gameState
