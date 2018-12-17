@@ -14,6 +14,8 @@ data State = State
     , keySisPressed    :: Bool
     , keyUpIsPressed   :: Bool
     , keyDownIsPressed :: Bool
+    , suspended :: Bool
+    , gen :: StdGen
     } deriving (Show)
 
 initialGameState :: State
@@ -28,5 +30,7 @@ initialGameState = State
     , keySisPressed    = False
     , keyUpIsPressed   = False
     , keyDownIsPressed = False
+    , suspended        = True
+    , gen              = mkStdGen 1
     }
 

@@ -5,6 +5,7 @@ import State
 import EventHandler
 import Renderer
 import Logic
+import System.Random
 
 window :: Display
 window = InWindow "Ping Pong Game" (900,700) (500,150)
@@ -17,4 +18,8 @@ fps = 60
 
 main :: IO ()
 main = do
-  play window background fps initialGameState render handleEvent updateGameState
+  g <- newStdGen
+  let iState = initialGameState { gen = g }
+  play window background fps iState render handleEvent updateGameState
+   where
+        fps = 60
